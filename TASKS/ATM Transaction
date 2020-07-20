@@ -1,0 +1,100 @@
+print('Welcome to Python Bank ATM')
+restart = ('Y')
+chances = 3
+balance = 1000
+
+# FUNCTIONS!!!
+
+def bal():
+    print('Your Balance is ₹',balance)
+
+def withdrawal(b):
+    w = int(input('Enter Amount to be Withdrawn in multiples of 100:'))
+    if(b>=w):
+        if(w>0):
+            if(w%100==0):
+                b = b - w
+                print('Your remaining Balance is: ₹',b)
+            else:
+                print('Enter Correct Amount!!!')
+    else:
+        print('!!!Insufficient Balance Try Again!!!') 
+    return(b)
+        
+    
+
+def deposit(d):
+    pay = int(input('Enter Amount to be Deposited in multiples of 100:'))
+    if(pay>0):
+        if(pay%100==0):
+            d = d + pay
+            print('Your New Amount is: ₹',d)
+    else:
+        print('Enter Correct Amount!!!')
+    return(d)
+
+def changepin(p,c):
+    opin = int(input("Enter your 4-digit pin:"))
+    if(opin==p):
+        npin = int(input('Enter your New 4-digit pin:'))
+        npin1 = int(input('Confirm your New pin:'))
+        if(npin==npin1):
+            print('Pin changed Successfully!!!')
+            p = npin
+        else:
+            print('Pin does not match!!! Try Again!!!')
+    else:
+        print('!!!Incorrect Pin!!!')
+        c = c - 1
+    return(p,c)
+
+def menu():
+    print('Press 1 to Check Balance')
+    print('Press 2 to Withdraw')
+    print('Press 3 to Deposit')
+    print('Press 4 to Change Pin')
+    print('Press 5 to Exit')
+
+#MAIN PROGRAM!!!
+
+while(chances>=0):
+    pin = int(input("Enter your 4-digit pin:"))
+    if(pin==1234):
+        while restart not in ('n','no','N'):
+            menu()
+            opt = int(input('\nChoose a correct option:'))
+            if(opt==1):
+                bal()
+                restart = input('Would you like to go back? Press N for No and Y for Yes')
+                if restart in ('n','N'):
+                    print('Thank You!!')
+                    break
+            elif(opt==2):
+                balance = withdrawal(balance)
+                
+            elif(opt==3):
+                balance = deposit(balance)
+                restart = input("Would you like to go back? Press N for No and Y for yes:")
+                if restart in('n','N'):
+                    print('Thank You!!')
+                    break
+            elif(opt==4):
+                (pin,chances) = changepin(pin,chances)
+                restart = input("Would you like to go back? Press N for No and Y for yes:")
+                if restart in('n','N'):
+                    print('Thank You!!')
+                    break
+            elif(opt==5):
+                print('\nPlease collect your Card!!')
+                print('\nThank You!!!')
+                break
+            else:
+                print('Please Enter a correct Choice!!')
+                restart = 'Y'
+    else:
+        print('!!!Incorrect Pin!!!')
+        chances = chances - 1
+        if(chances==0):
+            print("!!!Card Blocked!!!")
+            break
+        
