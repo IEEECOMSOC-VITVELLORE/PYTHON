@@ -1,0 +1,49 @@
+symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+max_key_size = len(symbols)
+
+def getMode():
+    while True:
+        print('Press e to Encrypt or d to Decrypt a message')
+        mode = input().lower()
+        if mode in ['e','d']:
+            return mode
+        else:
+            print('!!!Incorrect input!!! (Press either e for Encrypt or d for Decrypt)')
+
+def getMessage():
+    print("Enter your Message:")
+    return input()
+
+def getKey():
+    key = 0
+    while True:
+        print('Enter the key number (1-%s)' %(max_key_size))
+        key = int(input())
+        if(key >= 1 and key <= max_key_size):
+            return key
+
+def getTranslatedMessage(mode, message, key):
+    if mode[0] == 'd':
+        key = -key
+    translated = ''
+
+    for symbol in message:
+        symbolIndex = symbols.find(symbol)
+        if(symbolIndex == -1): #symbol not found in symbols so we add it without any change
+            translated += symbol
+        else:   #Encrypt or Decrypt
+            symbolIndex += key
+            if(symbolIndex >= len(symbols)):
+                symbolIndex -= len(symbols)
+            elif(symbolIndex < 0):
+                symbolIndex += len(symbols)
+            translated += symbols[symbolIndex]
+    return translated
+
+mode = getMode()
+message = getMessage()
+key = getKey()
+print('Your Translated text is:')
+print(getTranslatedMessage(mode, message, key))
+
+            
