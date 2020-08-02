@@ -1,0 +1,39 @@
+import random 
+
+print('<-<-<-Number Guessing Game->->->')
+
+num = random.randint(1, 9)
+chances = 0
+new = 0
+
+print('Guess a Number from 1 to 9: ')
+
+while chances < 5:
+    guess = int(input())
+
+    if guess == num:
+        print('Congratulations!!! You Won!!!')
+        new = 1
+       
+    elif guess < num:
+        print('Incorrect Guess Try again')
+    else:
+        print('Incorrect Guess Try again')
+    chances = chances + 1
+
+    if not chances < 5:
+        print('You Lose!!! The Number is', num)
+        new = 1
+    
+    if new == 1:
+        print('For New Game Press Y or else Press E to Exit:')
+        a = input()
+        if a in ('Y','y'):
+            new = 0
+            chances = 0
+            num = random.randint(1, 9)
+            print("Guess a Number from 1 to 9: ")
+            continue
+        else:
+            print("Thanks for Playing!!!")
+            break
